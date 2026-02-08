@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tharok - Orc Oracle</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             --parchment: #f4ece1;
@@ -354,7 +352,7 @@
             </div>
         </div>
         <div class="features-section">
-            <h2 class="section-title">Features & Traits</h2>
+            <h2 class="section-title">Features &amp; Traits</h2>
             <div class="feature-category">
                 <div class="feature-category-header">Orc Traits</div>
                 <div class="feature-category-content">
@@ -402,20 +400,57 @@
             </div>
         </div>
         <div class="blindfold-section">
-            <h2 class="section-title">Runed Blindfold</h2>
+            <h2 class="section-title">Blindfold of the Black Feather</h2>
             <div class="blindfold-box">
                 <div class="blindfold-content">
-                    <button class="blindfold-toggle active" id="blindfoldBtn" onclick="toggleBlindfold()">
-                        Blindfold ON
-                        <span class="blindfold-deactivate" onclick="event.stopPropagation(); removeBlindfold()">×</span>
-                    </button>
                     <div class="blindfold-info">
-                        <div class="blindfold-status active-status" id="blindfoldStatus">+1 Spell DC & Attack</div>
+                        <div class="blindfold-status active-status">Prophetic Attunement: +1 to spell save DC, spell attacks & weapon attacks/damage</div>
                         <div class="blindfold-stats">
-                            Spell DC: <span id="currentDC" class="boosted">17</span> | Attack: <span id="currentSpellAtk" class="boosted">+8</span>
+                            Spell DC: <span class="boosted">17</span> | Spell Attack: <span class="boosted">+8</span> | Weapon: <span class="boosted">+8</span> atk / <span class="boosted">+5</span> dmg
                         </div>
-                        <div class="blindfold-stats" style="margin-top: 4px; font-size: 0.9rem;">
-                            Weapon: <span id="currentWeaponAtk">+7</span> atk / <span id="currentWeaponDmg">+4</span> dmg
+
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(74, 26, 107, 0.2);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.9rem; color: var(--ink-light); font-weight: 600;">Prophetic Charges:</span>
+                                <div style="display: flex; gap: 8px;">
+                                    <div class="tracker-charge blindfold-charge" onclick="toggleBlindfoldCharge(this)"></div>
+                                    <div class="tracker-charge blindfold-charge" onclick="toggleBlindfoldCharge(this)"></div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 8px; padding: 8px; background: rgba(74, 26, 107, 0.05); border-radius: 4px; font-size: 0.85rem; line-height: 1.4;">
+                                <div style="font-weight: 600; color: var(--oracle); margin-bottom: 4px;">Read the Threads (1 charge)</div>
+                                <div style="color: var(--ink-light);">
+                                    <strong>Reaction:</strong> After you or a creature within 30 ft makes an attack roll, ability check, or saving throw, force a reroll. Target must use the second result.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(74, 26, 107, 0.2);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.9rem; color: var(--ink-light); font-weight: 600;">Unleash the Prophecy DC:</span>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <button onclick="decrementDC()" style="width: 24px; height: 24px; border: 2px solid var(--oracle); background: var(--parchment); color: var(--oracle); font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 1rem; line-height: 1;">-</button>
+                                    <span id="unleashDC" style="font-weight: bold; color: var(--oracle); min-width: 30px; text-align: center; font-size: 1.1rem;">8</span>
+                                    <button onclick="incrementDC()" style="width: 24px; height: 24px; border: 2px solid var(--oracle); background: var(--parchment); color: var(--oracle); font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 1rem; line-height: 1;">+</button>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 8px; padding: 8px; background: rgba(74, 26, 107, 0.05); border-radius: 4px; font-size: 0.85rem; line-height: 1.4;">
+                                <div style="font-weight: 600; color: var(--oracle); margin-bottom: 4px;">Unleash the Prophecy</div>
+                                <div style="color: var(--ink-light); margin-bottom: 6px;">
+                                    <strong>Bonus Action:</strong> Remove the blindfold and gain for 1 minute:
+                                </div>
+                                <ul style="margin: 0; padding-left: 20px; color: var(--ink-light);">
+                                    <li>Truesight 30 ft</li>
+                                    <li>Attack twice when you take the Attack action (can replace one attack with a cantrip)</li>
+                                    <li>Weapon attacks deal +1d8 psychic damage</li>
+                                    <li>Use blindfold features without spending charges (DC increases by charges that would be spent)</li>
+                                </ul>
+                                <div style="margin-top: 6px; color: var(--ruby); font-size: 0.8rem;">
+                                    <strong>End of each turn:</strong> WIS save (DC above, +2 each turn). On fail: stunned until end of next turn, blindfold wraps back, gain 1 exhaustion.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -474,7 +509,7 @@
                     <div class="spell-stat-label">Spell Save DC</div>
                     <div class="spell-stat-value" id="spellDCDisplay">17</div>
                 </div>
-                <div class="spell-stat">
+                <div class="spell-stat" style="cursor: pointer;">
                     <div class="spell-stat-label">Spell Attack</div>
                     <div class="spell-stat-value" id="spellAtkDisplay">+8</div>
                 </div>
@@ -482,9 +517,9 @@
                     <div class="spell-stat-label">Ability</div>
                     <div class="spell-stat-value">WIS</div>
                 </div>
-                <div class="spell-stat">
+                <div class="spell-stat" style="cursor: pointer;">
                     <div class="spell-stat-label">Weapon Atk</div>
-                    <div class="spell-stat-value" id="weaponAtkDisplay">+7</div>
+                    <div class="spell-stat-value" id="weaponAtkDisplay">+8</div>
                 </div>
             </div>
             <div class="slots-section">
@@ -579,8 +614,8 @@
             <div class="spell-level" style="margin-top: 20px;">
                 <div class="spell-level-header" style="background: linear-gradient(135deg, var(--war) 0%, #8b2a2a 100%);">Weapons</div>
                 <div class="spell-level-content">
-                    <strong>Quarterstaff:</strong> +7 to hit, 1d6+4 bludg (versatile 1d8+4)<br>
-                    <strong>Ice Weapon:</strong> +7 to hit, cold damage (Spear 1d6, Sword 1d6/1d8, Lance 1d8 reach, Hammer 1d10, Dagger 1d4 finesse)
+                    <strong>Quarterstaff:</strong> +8 to hit, 1d6+5 bludg (versatile 1d8+5)<br>
+                    <strong>Ice Weapon:</strong> +8 to hit, cold damage (Spear 1d6, Sword 1d6/1d8, Lance 1d8 reach, Hammer 1d10, Dagger 1d4 finesse) + 5
                 </div>
             </div>
         </div>
@@ -607,15 +642,15 @@
     </div>
     <script>
         const STORAGE_KEY = 'tharok_character_sheet';
-        let blindfoldActive = true;
         let touchOfFireActive = false;
+        let unleashDC = 8;
 
         function saveState() {
             const state = {
                 spellSlots: [],
                 trackerCharges: [],
-                blindfoldActive: blindfoldActive,
-                touchOfFireActive: touchOfFireActive
+                touchOfFireActive: touchOfFireActive,
+                unleashDC: unleashDC
             };
             document.querySelectorAll('.slot-checkbox').forEach(cb => state.spellSlots.push(cb.checked));
             document.querySelectorAll('.tracker-charge').forEach(charge => state.trackerCharges.push(charge.classList.contains('used')));
@@ -629,10 +664,10 @@
                 const state = JSON.parse(saved);
                 document.querySelectorAll('.slot-checkbox').forEach((cb, i) => { if (state.spellSlots[i]) cb.checked = state.spellSlots[i]; });
                 document.querySelectorAll('.tracker-charge').forEach((charge, i) => { if (state.trackerCharges[i]) charge.classList.add('used'); });
-                blindfoldActive = state.blindfoldActive !== undefined ? state.blindfoldActive : true;
-                if (blindfoldActive) activateBlindfold(); else removeBlindfold();
                 touchOfFireActive = state.touchOfFireActive || false;
                 if (touchOfFireActive) activateTouchOfFire();
+                unleashDC = state.unleashDC !== undefined ? state.unleashDC : 8;
+                document.getElementById('unleashDC').textContent = unleashDC;
             } catch (e) { console.error('Error loading state:', e); }
         }
 
@@ -644,51 +679,45 @@
 
         function toggleCharge(el) { el.classList.toggle('used'); saveState(); }
 
-        function toggleBlindfold() { if (!blindfoldActive) activateBlindfold(); }
-        function activateBlindfold() {
-            blindfoldActive = true;
-            const btn = document.getElementById('blindfoldBtn');
-            btn.classList.add('active');
-            btn.childNodes[0].textContent = 'Blindfold ON ';
-            document.getElementById('blindfoldStatus').textContent = '+1 Spell DC & Attack';
-            document.getElementById('blindfoldStatus').classList.add('active-status');
-            document.getElementById('currentDC').innerHTML = '<span class="boosted">17</span>';
-            document.getElementById('currentSpellAtk').innerHTML = '<span class="boosted">+8</span>';
-            document.getElementById('currentWeaponAtk').textContent = '+7';
-            document.getElementById('currentWeaponDmg').textContent = '+4';
-            document.getElementById('spellDCDisplay').textContent = '17';
-            document.getElementById('spellAtkDisplay').textContent = '+8';
-            document.getElementById('weaponAtkDisplay').textContent = '+7';
+        function toggleBlindfoldCharge(el) { el.classList.toggle('used'); saveState(); }
+
+        function incrementDC() {
+            unleashDC += 1;
+            document.getElementById('unleashDC').textContent = unleashDC;
             saveState();
         }
-        function removeBlindfold() {
-            blindfoldActive = false;
-            const btn = document.getElementById('blindfoldBtn');
-            btn.classList.remove('active');
-            btn.childNodes[0].textContent = 'Blindfold OFF ';
-            document.getElementById('blindfoldStatus').textContent = '+1 Weapon Attack & Damage';
-            document.getElementById('blindfoldStatus').classList.remove('active-status');
-            document.getElementById('currentDC').textContent = '16';
-            document.getElementById('currentSpellAtk').textContent = '+7';
-            document.getElementById('currentWeaponAtk').innerHTML = '<span class="boosted">+8</span>';
-            document.getElementById('currentWeaponDmg').innerHTML = '<span class="boosted">+5</span>';
-            document.getElementById('spellDCDisplay').textContent = '16';
-            document.getElementById('spellAtkDisplay').textContent = '+7';
-            document.getElementById('weaponAtkDisplay').textContent = '+8';
-            saveState();
+
+        function decrementDC() {
+            if (unleashDC > 8) {
+                unleashDC -= 1;
+                document.getElementById('unleashDC').textContent = unleashDC;
+                saveState();
+            }
         }
 
         function shortRest() {
             document.querySelectorAll('.orc-tracker .tracker-charge').forEach(c => c.classList.remove('used'));
+            // Restore 1 blindfold charge
+            const blindfoldCharges = document.querySelectorAll('.blindfold-charge');
+            const usedCharges = Array.from(blindfoldCharges).filter(c => c.classList.contains('used'));
+            if (usedCharges.length > 0) {
+                usedCharges[0].classList.remove('used');
+            }
+            // Decrease DC by 5 (minimum 8)
+            unleashDC = Math.max(8, unleashDC - 5);
+            document.getElementById('unleashDC').textContent = unleashDC;
             saveState();
-            showRestToast('Short Rest', 'Adrenaline Rush restored');
+            showRestToast('Short Rest', 'Adrenaline Rush & 1 Blindfold charge restored, DC decreased');
         }
         function longRest() {
             document.querySelectorAll('.slot-checkbox').forEach(cb => cb.checked = false);
             document.querySelectorAll('.tracker-charge').forEach(c => c.classList.remove('used'));
             deactivateTouchOfFire();
+            // Reset DC to 8
+            unleashDC = 8;
+            document.getElementById('unleashDC').textContent = unleashDC;
             saveState();
-            showRestToast('Long Rest', 'All resources restored');
+            showRestToast('Long Rest', 'All resources restored, DC reset to 8');
         }
 
         function toggleTouchOfFire() { if (!touchOfFireActive) activateTouchOfFire(); }
@@ -904,5 +933,6 @@
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeSpellPopup(); });
         document.querySelectorAll('.spell-link').forEach(link => { link.addEventListener('click', function() { openSpellPopup(this.dataset.spell); }); });
     </script>
-</body>
-</html>
+
+
+</body></html>
